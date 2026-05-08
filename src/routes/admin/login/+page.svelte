@@ -17,7 +17,7 @@
 			<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 shadow-lg">
 				<Shield size={28} class="text-white" />
 			</div>
-			<h1 class="text-2xl font-bold text-surface-900 dark:text-surface-100">Admin Access</h1>
+			<h1 class="text-2xl font-bold text-surface-900 ">Admin Access</h1>
 			<p class="mt-1 text-sm text-surface-500">Sign in to manage verses</p>
 		</div>
 
@@ -35,13 +35,13 @@
 			class="space-y-4"
 		>
 			{#if form?.error}
-				<div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
+				<div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700   ">
 					{form.error}
 				</div>
 			{/if}
 
 			<div>
-				<label for="email" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+				<label for="email" class="mb-1.5 block text-sm font-medium text-surface-700 ">
 					Email
 				</label>
 				<div class="relative">
@@ -55,14 +55,14 @@
 						value={form?.email || ''}
 						required
 						autocomplete="email"
-						class="touch-target w-full rounded-xl border border-surface-200 bg-white py-3 pr-4 pl-11 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+						class="touch-target w-full rounded-xl border border-surface-200 bg-white py-3 pr-4 pl-11 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none     "
 						placeholder="admin@example.com"
 					/>
 				</div>
 			</div>
 
 			<div>
-				<label for="password" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+				<label for="password" class="mb-1.5 block text-sm font-medium text-surface-700 ">
 					Password
 				</label>
 				<div class="relative">
@@ -75,7 +75,7 @@
 						type="password"
 						required
 						autocomplete="current-password"
-						class="touch-target w-full rounded-xl border border-surface-200 bg-white py-3 pr-4 pl-11 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+						class="touch-target w-full rounded-xl border border-surface-200 bg-white py-3 pr-4 pl-11 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none     "
 						placeholder="••••••••"
 					/>
 				</div>

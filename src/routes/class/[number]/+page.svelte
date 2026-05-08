@@ -14,12 +14,12 @@
 	<div>
 		<a
 			href="/verses"
-			class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200"
+			class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700  "
 		>
 			<ArrowLeft size={16} />
 			All verses
 		</a>
-		<h1 class="text-2xl font-bold text-surface-900 dark:text-surface-100">Class {data.classNumber}</h1>
+		<h1 class="text-2xl font-bold text-surface-900 ">Class {data.classNumber}</h1>
 		<p class="mt-1 text-sm text-surface-500">{data.totalCount} verse{data.totalCount !== 1 ? 's' : ''}</p>
 	</div>
 
@@ -41,7 +41,7 @@
 				{#if data.currentPage > 1}
 					<a
 						href="/class/{data.classNumber}?page={data.currentPage - 1}"
-						class="flex items-center gap-1 rounded-xl border border-surface-200 bg-white px-4 py-2.5 text-sm font-medium text-surface-700 transition-all hover:bg-surface-50 active:scale-95 dark:border-surface-700 dark:bg-surface-900 dark:text-surface-300"
+						class="flex items-center gap-1 rounded-xl border border-surface-200 bg-white px-4 py-2.5 text-sm font-medium text-surface-700 transition-all hover:bg-surface-50 active:scale-95   "
 					>
 						<ChevronLeft size={16} /> Prev
 					</a>
@@ -50,7 +50,7 @@
 				{#if data.currentPage < data.totalPages}
 					<a
 						href="/class/{data.classNumber}?page={data.currentPage + 1}"
-						class="flex items-center gap-1 rounded-xl border border-surface-200 bg-white px-4 py-2.5 text-sm font-medium text-surface-700 transition-all hover:bg-surface-50 active:scale-95 dark:border-surface-700 dark:bg-surface-900 dark:text-surface-300"
+						class="flex items-center gap-1 rounded-xl border border-surface-200 bg-white px-4 py-2.5 text-sm font-medium text-surface-700 transition-all hover:bg-surface-50 active:scale-95   "
 					>
 						Next <ChevronRight size={16} />
 					</a>
@@ -58,9 +58,9 @@
 			</nav>
 		{/if}
 	{:else}
-		<div class="rounded-2xl bg-surface-100 p-12 text-center dark:bg-surface-900">
+		<div class="rounded-2xl bg-surface-100 p-12 text-center ">
 			<BookOpen size={40} class="mx-auto mb-3 text-surface-400" />
-			<p class="text-lg font-medium text-surface-600 dark:text-surface-400">No verses in this class</p>
+			<p class="text-lg font-medium text-surface-600 ">No verses in this class</p>
 		</div>
 	{/if}
 </div>

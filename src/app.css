@@ -2,29 +2,31 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-primary-50: oklch(0.97 0.02 285);
-	--color-primary-100: oklch(0.93 0.04 285);
-	--color-primary-200: oklch(0.87 0.08 285);
-	--color-primary-300: oklch(0.78 0.13 285);
-	--color-primary-400: oklch(0.68 0.18 285);
-	--color-primary-500: oklch(0.58 0.22 285);
-	--color-primary-600: oklch(0.50 0.22 285);
-	--color-primary-700: oklch(0.44 0.20 285);
-	--color-primary-800: oklch(0.37 0.16 285);
-	--color-primary-900: oklch(0.30 0.12 285);
-	--color-primary-950: oklch(0.20 0.08 285);
+	/* Indigo-based Premium Palette */
+	--color-primary-50: oklch(0.97 0.015 280);
+	--color-primary-100: oklch(0.94 0.03 280);
+	--color-primary-200: oklch(0.88 0.06 280);
+	--color-primary-300: oklch(0.80 0.10 280);
+	--color-primary-400: oklch(0.70 0.14 280);
+	--color-primary-500: oklch(0.58 0.18 280);
+	--color-primary-600: oklch(0.50 0.18 280);
+	--color-primary-700: oklch(0.42 0.16 280);
+	--color-primary-800: oklch(0.35 0.14 280);
+	--color-primary-900: oklch(0.28 0.10 280);
+	--color-primary-950: oklch(0.18 0.06 280);
 
-	--color-surface-50: oklch(0.99 0.005 285);
-	--color-surface-100: oklch(0.97 0.008 285);
-	--color-surface-200: oklch(0.94 0.012 285);
-	--color-surface-300: oklch(0.88 0.015 285);
-	--color-surface-400: oklch(0.72 0.02 285);
-	--color-surface-500: oklch(0.55 0.02 285);
-	--color-surface-600: oklch(0.45 0.02 285);
-	--color-surface-700: oklch(0.35 0.02 285);
-	--color-surface-800: oklch(0.25 0.02 285);
-	--color-surface-900: oklch(0.18 0.02 285);
-	--color-surface-950: oklch(0.12 0.015 285);
+	/* Soft Warm Neutral Surface */
+	--color-surface-50: oklch(0.99 0.003 280);
+	--color-surface-100: oklch(0.98 0.005 280);
+	--color-surface-200: oklch(0.96 0.008 280);
+	--color-surface-300: oklch(0.92 0.01 280);
+	--color-surface-400: oklch(0.75 0.015 280);
+	--color-surface-500: oklch(0.60 0.015 280);
+	--color-surface-600: oklch(0.45 0.02 280);
+	--color-surface-700: oklch(0.35 0.02 280);
+	--color-surface-800: oklch(0.25 0.02 280);
+	--color-surface-900: oklch(0.18 0.02 280);
+	--color-surface-950: oklch(0.12 0.015 280);
 
 	--color-accent-400: oklch(0.75 0.15 160);
 	--color-accent-500: oklch(0.65 0.18 160);
@@ -33,21 +35,21 @@
 	--font-serif: 'Lora', 'Georgia', serif;
 	--font-malayalam: 'Noto Serif Malayalam', 'Meera', serif;
 
-	--radius-card: 1rem;
-	--radius-btn: 0.75rem;
+	--radius-card: 1.5rem;
+	--radius-btn: 1rem;
 
-	--shadow-card: 0 1px 3px oklch(0 0 0 / 0.08), 0 4px 12px oklch(0 0 0 / 0.04);
-	--shadow-card-hover: 0 2px 8px oklch(0 0 0 / 0.12), 0 8px 24px oklch(0 0 0 / 0.06);
-	--shadow-elevated: 0 8px 32px oklch(0 0 0 / 0.12), 0 2px 8px oklch(0 0 0 / 0.06);
+	--shadow-card: 0 1px 3px oklch(0 0 0 / 0.05), 0 10px 25px -5px oklch(0 0 0 / 0.05);
+	--shadow-card-hover: 0 20px 40px -10px oklch(0 0 0 / 0.1);
+	--shadow-elevated: 0 25px 50px -12px oklch(0 0 0 / 0.15);
 }
-
-/* Base styles */
 
 /* Base styles */
 html {
 	scroll-behavior: smooth;
 	-webkit-tap-highlight-color: transparent;
 	overscroll-behavior: none;
+	/* Force light appearance at system level */
+	color-scheme: light;
 }
 
 body {
@@ -60,12 +62,6 @@ body {
 	overflow-x: hidden;
 }
 
-/* Dark mode */
-.dark body {
-	background-color: var(--color-surface-950);
-	color: var(--color-surface-100);
-}
-
 /* Safe area padding for notched devices */
 .safe-bottom {
 	padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -74,20 +70,15 @@ body {
 /* Verse typography */
 .verse-text {
 	font-family: var(--font-malayalam);
-	line-height: 1.8;
-	letter-spacing: 0.01em;
+	line-height: 1.85;
+	letter-spacing: 0.015em;
 }
 
-/* Smooth transitions for theme changes */
+/* Smooth transitions */
 * {
-	transition-property: background-color, border-color, color;
-	transition-duration: 200ms;
-	transition-timing-function: ease;
-}
-
-/* Disable transition on page load */
-.no-transitions * {
-	transition: none !important;
+	transition-property: background-color, border-color, color, box-shadow;
+	transition-duration: 250ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Touch target minimum */
@@ -105,28 +96,18 @@ body {
 .skeleton {
 	background: linear-gradient(
 		90deg,
-		var(--color-surface-200) 25%,
-		var(--color-surface-100) 50%,
-		var(--color-surface-200) 75%
+		var(--color-surface-100) 25%,
+		var(--color-surface-200) 50%,
+		var(--color-surface-100) 75%
 	);
 	background-size: 200% 100%;
 	animation: shimmer 1.5s infinite ease-in-out;
-	border-radius: 0.5rem;
-}
-
-.dark .skeleton {
-	background: linear-gradient(
-		90deg,
-		var(--color-surface-800) 25%,
-		var(--color-surface-700) 50%,
-		var(--color-surface-800) 75%
-	);
-	background-size: 200% 100%;
+	border-radius: 0.75rem;
 }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-	width: 4px;
+	width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -135,14 +116,14 @@ body {
 
 ::-webkit-scrollbar-thumb {
 	background: var(--color-surface-300);
-	border-radius: 2px;
+	border-radius: 10px;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-	background: var(--color-surface-700);
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-surface-400);
 }
 
-/* Pull-to-refresh prevention */
+/* Pull-to-refresh prevention for SPA feel */
 body {
 	overscroll-behavior-y: contain;
 }

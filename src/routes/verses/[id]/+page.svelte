@@ -25,14 +25,14 @@
 	<!-- Back button -->
 	<a
 		href="/verses"
-		class="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200"
+		class="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700  "
 	>
 		<ArrowLeft size={16} />
 		Back to verses
 	</a>
 
 	<!-- Verse display -->
-	<article class="overflow-hidden rounded-2xl border border-surface-200 bg-white shadow-[var(--shadow-card)] dark:border-surface-800 dark:bg-surface-900">
+	<article class="overflow-hidden rounded-2xl border border-surface-200 bg-white shadow-[var(--shadow-card)]  ">
 		<!-- Gradient header -->
 		<div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 px-6 py-8">
 			<div class="mb-2 flex items-center gap-2">
@@ -45,27 +45,27 @@
 
 		<!-- Verse body -->
 		<div class="p-6">
-			<blockquote class="verse-text text-xl leading-[1.9] text-surface-800 dark:text-surface-200">
+			<blockquote class="verse-text text-xl leading-[1.9] text-surface-800 ">
 				"{verse.verse}"
 			</blockquote>
 
 			<div class="mt-2 text-right">
-				<span class="text-base font-semibold text-primary-600 dark:text-primary-400">— {verse.reference}</span>
+				<span class="text-base font-semibold text-primary-600 ">— {verse.reference}</span>
 			</div>
 		</div>
 
 		<!-- Actions -->
-		<div class="flex items-center justify-center gap-2 border-t border-surface-100 px-6 py-4 dark:border-surface-800">
+		<div class="flex items-center justify-center gap-2 border-t border-surface-100 px-6 py-4 ">
 			<button
 				onclick={() => copyToClipboard(`"${verse.verse}" — ${verse.reference}`)}
-				class="flex items-center gap-2 rounded-xl bg-surface-100 px-5 py-3 text-sm font-medium text-surface-700 transition-all hover:bg-surface-200 active:scale-95 dark:bg-surface-800 dark:text-surface-300 dark:hover:bg-surface-700"
+				class="flex items-center gap-2 rounded-xl bg-surface-100 px-5 py-3 text-sm font-medium text-surface-700 transition-all hover:bg-surface-200 active:scale-95   "
 			>
 				<Copy size={16} />
 				Copy
 			</button>
 			<button
 				onclick={() => shareVerse(verse.verse, verse.reference)}
-				class="flex items-center gap-2 rounded-xl bg-surface-100 px-5 py-3 text-sm font-medium text-surface-700 transition-all hover:bg-surface-200 active:scale-95 dark:bg-surface-800 dark:text-surface-300 dark:hover:bg-surface-700"
+				class="flex items-center gap-2 rounded-xl bg-surface-100 px-5 py-3 text-sm font-medium text-surface-700 transition-all hover:bg-surface-200 active:scale-95   "
 			>
 				<Share2 size={16} />
 				Share
@@ -73,8 +73,8 @@
 			<button
 				onclick={() => favorites.toggle(verse.id)}
 				class="flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium transition-all active:scale-95 {isFav
-					? 'bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950/30 dark:text-red-400 dark:hover:bg-red-950/50'
-					: 'bg-surface-100 text-surface-700 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-300 dark:hover:bg-surface-700'}"
+					? 'bg-red-50 text-red-600 hover:bg-red-100   '
+					: 'bg-surface-100 text-surface-700 hover:bg-surface-200   '}"
 			>
 				<Heart size={16} fill={isFav ? 'currentColor' : 'none'} />
 				{isFav ? 'Saved' : 'Save'}
@@ -83,7 +83,7 @@
 	</article>
 
 	<!-- Metadata -->
-	<div class="mt-6 rounded-xl bg-surface-50 p-4 text-xs text-surface-400 dark:bg-surface-900 dark:text-surface-500">
+	<div class="mt-6 rounded-xl bg-surface-50 p-4 text-xs text-surface-400  ">
 		<p>Added {new Date(verse.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 	</div>
 </div>

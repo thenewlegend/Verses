@@ -17,16 +17,16 @@
 	<div>
 		<a
 			href="/admin/dashboard"
-			class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200"
+			class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700  "
 		>
 			<ArrowLeft size={16} />
 			Back to dashboard
 		</a>
-		<h1 class="text-xl font-bold text-surface-900 dark:text-surface-100">Add New Verse</h1>
+		<h1 class="text-xl font-bold text-surface-900 ">Add New Verse</h1>
 	</div>
 
 	{#if $formMessage}
-		<div class="flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-400">
+		<div class="flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700   ">
 			<AlertTriangle size={16} />
 			{$formMessage}
 		</div>
@@ -35,7 +35,7 @@
 	<form method="POST" use:enhance class="space-y-5">
 		<!-- Verse text -->
 		<div>
-			<label for="verse" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="verse" class="mb-1.5 block text-sm font-medium text-surface-700 ">
 				Verse Text <span class="text-red-500">*</span>
 			</label>
 			<textarea
@@ -44,7 +44,7 @@
 				bind:value={$form.verse}
 				rows="5"
 				required
-				class="w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+				class="w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none     "
 				placeholder="Enter the verse text..."
 			></textarea>
 			{#if $errors.verse}
@@ -54,7 +54,7 @@
 
 		<!-- Reference -->
 		<div>
-			<label for="reference" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="reference" class="mb-1.5 block text-sm font-medium text-surface-700 ">
 				Reference <span class="text-red-500">*</span>
 			</label>
 			<input
@@ -63,7 +63,7 @@
 				type="text"
 				bind:value={$form.reference}
 				required
-				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none     "
 				placeholder="e.g., John 3:16"
 			/>
 			{#if $errors.reference}
@@ -73,7 +73,7 @@
 
 		<!-- Class number -->
 		<div>
-			<label for="class_number" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="class_number" class="mb-1.5 block text-sm font-medium text-surface-700 ">
 				Class Number <span class="text-red-500">*</span>
 			</label>
 			<input
@@ -83,7 +83,7 @@
 				bind:value={$form.class_number}
 				min="1"
 				required
-				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none     "
 				placeholder="1"
 			/>
 			{#if $errors.class_number}
@@ -100,7 +100,7 @@
 				bind:checked={$form.is_published}
 				class="h-5 w-5 rounded border-surface-300 text-primary-600 focus:ring-primary-500"
 			/>
-			<label for="is_published" class="text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="is_published" class="text-sm font-medium text-surface-700 ">
 				Publish immediately
 			</label>
 		</div>

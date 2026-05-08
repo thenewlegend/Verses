@@ -8,7 +8,7 @@
 
 {#each Array(count) as _, i}
 	<div
-		class="rounded-[var(--radius-card)] border border-surface-200 bg-white p-5 dark:border-surface-800 dark:bg-surface-900"
+		class="rounded-[var(--radius-card)] border border-surface-200 bg-white p-5  "
 	>
 		<div class="mb-3 flex items-center justify-between">
 			<div class="skeleton h-6 w-16"></div>

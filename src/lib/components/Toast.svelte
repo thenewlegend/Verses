@@ -11,9 +11,9 @@
 	};
 
 	const colorMap = {
-		success: 'bg-green-50 border-green-200 text-green-800 dark:bg-green-950/50 dark:border-green-800 dark:text-green-200',
-		error: 'bg-red-50 border-red-200 text-red-800 dark:bg-red-950/50 dark:border-red-800 dark:text-red-200',
-		info: 'bg-primary-50 border-primary-200 text-primary-800 dark:bg-primary-950/50 dark:border-primary-800 dark:text-primary-200'
+		success: 'bg-green-50 border-green-200 text-green-800   ',
+		error: 'bg-red-50 border-red-200 text-red-800   ',
+		info: 'bg-primary-50 border-primary-200 text-primary-800   '
 	};
 </script>
 

@@ -5,8 +5,6 @@
 	import BottomNav from "$lib/components/BottomNav.svelte";
 	import Toast from "$lib/components/Toast.svelte";
 	import InstallPrompt from "$lib/components/InstallPrompt.svelte";
-	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
-	import { theme } from "$lib/stores/theme";
 	import { page } from "$app/stores";
 
 	let { data, children } = $props();
@@ -36,12 +34,12 @@
 	/>
 	<meta
 		name="theme-color"
-		content={$theme === "dark" ? "#0f0a1a" : "#1e1b4b"}
+		content="#fcfcff"
 	/>
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta
 		name="apple-mobile-web-app-status-bar-style"
-		content="black-translucent"
+		content="default"
 	/>
 	<link rel="apple-touch-icon" href="/icon-192.png" />
 </svelte:head>
@@ -50,7 +48,7 @@
 	<!-- Top bar -->
 	{#if !isAdminRoute}
 		<header
-			class="sticky top-0 z-40 border-b border-surface-200/60 bg-white/80 backdrop-blur-xl dark:border-surface-800/60 dark:bg-surface-950/80"
+			class="sticky top-0 z-40 border-b border-surface-200/60 bg-white/80 backdrop-blur-xl"
 		>
 			<div
 				class="mx-auto flex max-w-2xl items-center justify-between px-4 py-3"
@@ -62,7 +60,7 @@
 						✝️
 					</div>
 					<span
-						class="text-lg font-bold tracking-tight text-surface-900 dark:text-surface-100"
+						class="text-lg font-bold tracking-tight text-surface-900 "
 					>
 						{#if data.user}
 							Hi, {data.user.user_metadata?.full_name ||
@@ -74,7 +72,6 @@
 					</span>
 				</a>
 				<div class="flex items-center gap-1">
-					<ThemeToggle />
 				</div>
 			</div>
 		</header>

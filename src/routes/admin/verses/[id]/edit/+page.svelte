@@ -2,6 +2,7 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { enhance as formEnhance } from '$app/forms';
 	import { ArrowLeft, Save, Trash2, Loader2, CheckCircle, AlertTriangle } from '@lucide/svelte';
+	import ConfirmModal from '$lib/components/ConfirmModal.svelte';
 
 	let { data } = $props();
 	let showDeleteConfirm = $state(false);
@@ -20,51 +21,41 @@
 		<div>
 			<a
 				href="/admin/dashboard"
-				class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200"
+				class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700"
 			>
 				<ArrowLeft size={16} />
 				Back to dashboard
 			</a>
-			<h1 class="text-xl font-bold text-surface-900 dark:text-surface-100">Edit Verse</h1>
+			<h1 class="text-xl font-bold text-surface-900">Edit Verse</h1>
 		</div>
 		<button
-			onclick={() => (showDeleteConfirm = !showDeleteConfirm)}
-			class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-950/30"
+			onclick={() => (showDeleteConfirm = true)}
+			class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-50"
 		>
 			<Trash2 size={16} />
 			Delete
 		</button>
 	</div>
 
-	<!-- Delete confirmation -->
-	{#if showDeleteConfirm}
-		<div class="rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-950/30">
-			<p class="mb-3 text-sm font-medium text-red-700 dark:text-red-400">
-				Are you sure you want to delete this verse? This action cannot be undone.
-			</p>
-			<div class="flex gap-2">
-				<form method="POST" action="?/delete" use:formEnhance>
-					<button
-						type="submit"
-						class="rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700 active:scale-95"
-					>
-						Yes, delete
-					</button>
-				</form>
-				<button
-					onclick={() => (showDeleteConfirm = false)}
-					class="rounded-xl px-4 py-2 text-sm font-medium text-surface-600 transition-colors hover:bg-surface-200 dark:text-surface-400 dark:hover:bg-surface-800"
-				>
-					Cancel
-				</button>
-			</div>
-		</div>
-	{/if}
+	<!-- Delete confirmation modal -->
+	<ConfirmModal
+		show={showDeleteConfirm}
+		title="Delete Verse?"
+		message="Are you sure you want to delete this verse? This action cannot be undone."
+		confirmLabel="Delete Forever"
+		onCancel={() => (showDeleteConfirm = false)}
+		onConfirm={() => {
+			const form = document.getElementById('delete-form');
+			if (form instanceof HTMLFormElement) form.requestSubmit();
+		}}
+	/>
+
+	<form id="delete-form" method="POST" action="?/delete" use:formEnhance class="hidden"></form>
 
 	{#if $formMessage}
 		<div class="flex items-center gap-2 rounded-xl border px-4 py-3 text-sm {$formMessage.includes('successfully')
-			? 'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950/30 dark:text-green-400'
-			: 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-400'}">
+			? 'border-green-200 bg-green-50 text-green-700'
+			: 'border-amber-200 bg-amber-50 text-amber-700'}">
 			{#if $formMessage.includes('successfully')}
 				<CheckCircle size={16} />
 			{:else}
@@ -77,7 +68,7 @@
 	<form method="POST" action="?/update" use:enhance class="space-y-5">
 		<!-- Verse text -->
 		<div>
-			<label for="verse" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="verse" class="mb-1.5 block text-sm font-medium text-surface-700 ">
 				Verse Text <span class="text-red-500">*</span>
 			</label>
 			<textarea
@@ -86,7 +77,7 @@
 				bind:value={$form.verse}
 				rows="5"
 				required
-				class="w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+				class="w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none     "
 			></textarea>
 			{#if $errors.verse}
 				<p class="mt-1 text-xs text-red-500">{$errors.verse}</p>
@@ -95,7 +86,7 @@
 
 		<!-- Reference -->
 		<div>
-			<label for="reference" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="reference" class="mb-1.5 block text-sm font-medium text-surface-700">
 				Reference <span class="text-red-500">*</span>
 			</label>
 			<input
@@ -104,7 +95,7 @@
 				type="text"
 				bind:value={$form.reference}
 				required
-				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none"
 			/>
 			{#if $errors.reference}
 				<p class="mt-1 text-xs text-red-500">{$errors.reference}</p>
@@ -113,7 +104,7 @@
 
 		<!-- Class number -->
 		<div>
-			<label for="class_number" class="mb-1.5 block text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="class_number" class="mb-1.5 block text-sm font-medium text-surface-700">
 				Class Number <span class="text-red-500">*</span>
 			</label>
 			<input
@@ -123,7 +114,7 @@
 				bind:value={$form.class_number}
 				min="1"
 				required
-				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:focus:border-primary-600 dark:focus:ring-primary-900/40"
+				class="touch-target w-full rounded-xl border border-surface-200 bg-white px-4 py-3 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:outline-none"
 			/>
 			{#if $errors.class_number}
 				<p class="mt-1 text-xs text-red-500">{$errors.class_number}</p>
@@ -139,7 +130,7 @@
 				bind:checked={$form.is_published}
 				class="h-5 w-5 rounded border-surface-300 text-primary-600 focus:ring-primary-500"
 			/>
-			<label for="is_published" class="text-sm font-medium text-surface-700 dark:text-surface-300">
+			<label for="is_published" class="text-sm font-medium text-surface-700">
 				Published
 			</label>
 		</div>

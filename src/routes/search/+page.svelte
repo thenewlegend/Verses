@@ -27,7 +27,7 @@
 
 <div class="space-y-6 py-2">
 	<div>
-		<h1 class="text-2xl font-bold text-surface-900 dark:text-surface-100">Search Verses</h1>
+		<h1 class="text-2xl font-bold text-surface-900 ">Search Verses</h1>
 		<p class="mt-1 text-sm text-surface-500">Search by verse text or reference</p>
 	</div>
 
@@ -35,7 +35,7 @@
 
 	{#if data.query}
 		<p class="text-sm text-surface-500">
-			{data.totalCount} result{data.totalCount !== 1 ? 's' : ''} for "<span class="font-medium text-surface-700 dark:text-surface-300">{data.query}</span>"
+			{data.totalCount} result{data.totalCount !== 1 ? 's' : ''} for "<span class="font-medium text-surface-700 ">{data.query}</span>"
 		</p>
 	{/if}
 
@@ -52,13 +52,13 @@
 			{/each}
 		</div>
 	{:else if data.query}
-		<div class="rounded-2xl bg-surface-100 p-12 text-center dark:bg-surface-900">
+		<div class="rounded-2xl bg-surface-100 p-12 text-center ">
 			<Search size={40} class="mx-auto mb-3 text-surface-400" />
-			<p class="text-lg font-medium text-surface-600 dark:text-surface-400">No results found</p>
+			<p class="text-lg font-medium text-surface-600 ">No results found</p>
 			<p class="mt-1 text-sm text-surface-400">Try different keywords or check your spelling.</p>
 		</div>
 	{:else}
-		<div class="rounded-2xl bg-surface-100 p-12 text-center dark:bg-surface-900">
+		<div class="rounded-2xl bg-surface-100 p-12 text-center ">
 			<BookOpen size={40} class="mx-auto mb-3 text-surface-300" />
 			<p class="text-sm text-surface-400">Type to search through all published verses.</p>
 		</div>

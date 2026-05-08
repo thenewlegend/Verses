@@ -55,13 +55,13 @@
 <div class="space-y-6 py-2">
 	<div class="flex items-center justify-between">
 		<div>
-			<h1 class="text-2xl font-bold text-surface-900 dark:text-surface-100">Favorites</h1>
+			<h1 class="text-2xl font-bold text-surface-900 ">Favorites</h1>
 			<p class="mt-1 text-sm text-surface-500">{favIds.length} saved verse{favIds.length !== 1 ? 's' : ''}</p>
 		</div>
 		{#if favIds.length > 0}
 			<button
 				onclick={() => favorites.clear()}
-				class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-950/30"
+				class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-50 "
 			>
 				<Trash2 size={14} />
 				Clear all
@@ -88,9 +88,9 @@
 			{/each}
 		</div>
 	{:else}
-		<div class="rounded-2xl bg-surface-100 p-12 text-center dark:bg-surface-900">
+		<div class="rounded-2xl bg-surface-100 p-12 text-center ">
 			<Heart size={40} class="mx-auto mb-3 text-surface-300" />
-			<p class="text-lg font-medium text-surface-600 dark:text-surface-400">No favorites yet</p>
+			<p class="text-lg font-medium text-surface-600 ">No favorites yet</p>
 			<p class="mt-1 text-sm text-surface-400">Tap the heart icon on any verse to save it here.</p>
 			<a
 				href="/verses"

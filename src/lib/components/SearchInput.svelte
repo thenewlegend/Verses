@@ -42,14 +42,14 @@
 		{placeholder}
 		{value}
 		oninput={handleInput}
-		class="touch-target w-full rounded-2xl border border-surface-200 bg-surface-50 py-3.5 pr-12 pl-12 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-100 focus:outline-none dark:border-surface-700 dark:bg-surface-900 dark:text-surface-100 dark:placeholder:text-surface-500 dark:focus:border-primary-600 dark:focus:bg-surface-800 dark:focus:ring-primary-900/40"
+		class="touch-target w-full rounded-2xl border border-surface-200 bg-surface-50 py-3.5 pr-12 pl-12 text-base text-surface-900 placeholder:text-surface-400 focus:border-primary-400 focus:bg-white focus:ring-2 focus:ring-primary-100 focus:outline-none       "
 		aria-label="Search"
 	/>
 
 	{#if value}
 		<button
 			onclick={clear}
-			class="absolute inset-y-0 right-0 flex items-center pr-4 text-surface-400 hover:text-surface-600 dark:hover:text-surface-300"
+			class="absolute inset-y-0 right-0 flex items-center pr-4 text-surface-400 hover:text-surface-600 "
 			aria-label="Clear search"
 		>
 			<X size={20} />

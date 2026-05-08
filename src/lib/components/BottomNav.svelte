@@ -13,7 +13,7 @@
 </script>
 
 <nav
-	class="fixed bottom-0 left-0 right-0 z-50 border-t border-surface-200 bg-white/90 backdrop-blur-xl safe-bottom dark:border-surface-800 dark:bg-surface-950/90"
+	class="fixed bottom-0 left-0 right-0 z-50 border-t border-surface-200 bg-white/90 backdrop-blur-xl safe-bottom  "
 	aria-label="Main navigation"
 >
 	<div class="mx-auto flex max-w-lg items-center justify-around px-2">
@@ -23,13 +23,13 @@
 			<a
 				href={item.href}
 				class="touch-target flex flex-1 flex-col items-center gap-0.5 py-2 transition-all duration-200 {isActive
-					? 'text-primary-600 dark:text-primary-400'
-					: 'text-surface-500 hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200'}"
+					? 'text-primary-600 '
+					: 'text-surface-500 hover:text-surface-700  '}"
 				aria-current={isActive ? 'page' : undefined}
 			>
 				<div
 					class="flex h-8 w-12 items-center justify-center rounded-2xl transition-all duration-200 {isActive
-						? 'bg-primary-100 dark:bg-primary-900/40'
+						? 'bg-primary-100 '
 						: ''}"
 				>
 					<item.icon size={20} strokeWidth={isActive ? 2.5 : 2} />
