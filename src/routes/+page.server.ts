@@ -1,17 +1,21 @@
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ locals: { supabase } }) => {
+export const load: PageServerLoad = async ({ locals: { supabase }, url }) => {
+	const excludeId = url.searchParams.get('exclude');
+
 	// Get total count
 	const { count: totalCount } = await supabase
 		.from('verses')
 		.select('*', { count: 'exact', head: true })
 		.eq('is_published', true);
 
-	// Get a random published verse
-	const { data: allIds } = await supabase
-		.from('verses')
-		.select('id')
-		.eq('is_published', true);
+	// Get all published IDs
+	let query = supabase.from('verses').select('id').eq('is_published', true);
+	if (excludeId) {
+		query = query.neq('id', excludeId);
+	}
+
+	const { data: allIds } = await query;
 
 	let verseOfDay = null;
 	if (allIds && allIds.length > 0) {
@@ -24,6 +28,14 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
 			.eq('id', randomId)
 			.single();
 
+		verseOfDay = data;
+	} else if (excludeId) {
+		// Fallback: if only one verse exists and it was excluded, fetch it anyway
+		const { data } = await supabase
+			.from('verses')
+			.select('*')
+			.eq('id', excludeId)
+			.single();
 		verseOfDay = data;
 	}
 

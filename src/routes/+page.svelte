@@ -34,6 +34,26 @@
 			localStorage.removeItem('vod-history');
 		}
 	}
+	let isRefreshing = $state(false);
+
+	async function refreshVerse() {
+		if (isRefreshing) return;
+		isRefreshing = true;
+		
+		const { invalidateAll, goto } = await import('$app/navigation');
+		const currentUrl = new URL(window.location.href);
+		if (data.verseOfDay) {
+			currentUrl.searchParams.set('exclude', data.verseOfDay.id);
+		}
+		
+		await goto(currentUrl.pathname + currentUrl.search, { 
+			invalidateAll: true,
+			noScroll: true,
+			keepFocus: true
+		});
+		
+		isRefreshing = false;
+	}
 </script>
 
 <svelte:head>
@@ -44,7 +64,19 @@
 <div class="space-y-8 py-2">
 	<!-- Hero: Verse of the Day -->
 	{#if data.verseOfDay}
-		<section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 p-6 text-white shadow-elevated">
+		<section class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 p-6 text-white shadow-elevated transition-all">
+			<!-- Loading overlay -->
+			{#if isRefreshing}
+				<div class="absolute inset-0 z-20 flex items-center justify-center bg-primary-900/60 backdrop-blur-[2px]">
+					<div class="flex flex-col items-center gap-3">
+						<RefreshCw size={24} class="animate-spin text-white/80" />
+						<div class="h-1 w-32 overflow-hidden rounded-full bg-white/20">
+							<div class="h-full bg-white transition-all duration-700 ease-out" style="width: {isRefreshing ? '100%' : '0%'}"></div>
+						</div>
+					</div>
+				</div>
+			{/if}
+
 			<!-- Decorative elements -->
 			<div class="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-white/5"></div>
 			<div class="pointer-events-none absolute -bottom-8 -left-8 h-24 w-24 rounded-full bg-white/5"></div>
@@ -76,12 +108,11 @@
 						Read more <ArrowRight size={14} />
 					</a>
 					<button
-						onclick={() => {
-							import('$app/navigation').then(m => m.invalidateAll());
-						}}
-						class="inline-flex items-center gap-1.5 rounded-xl bg-white/10 px-4 py-2 text-sm font-medium text-white/80 backdrop-blur-sm transition-colors hover:bg-white/20 active:scale-95"
+						onclick={refreshVerse}
+						disabled={isRefreshing}
+						class="inline-flex items-center gap-1.5 rounded-xl bg-white/10 px-4 py-2 text-sm font-medium text-white/80 backdrop-blur-sm transition-colors hover:bg-white/20 disabled:opacity-50 active:scale-95"
 					>
-						<RefreshCw size={14} /> New verse
+						<RefreshCw size={14} class={isRefreshing ? 'animate-spin' : ''} /> New verse
 					</button>
 				</div>
 			</div>
