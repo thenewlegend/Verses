@@ -30,7 +30,7 @@
 	<title>Bible Verse App</title>
 	<meta name="description" content="Browse, search, and save beautiful Bible verses. Discover your verse of the day." />
 	<meta name="theme-color" content={$theme === 'dark' ? '#0f0a1a' : '#1e1b4b'} />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<link rel="apple-touch-icon" href="/icon-192.png" />
 </svelte:head>
