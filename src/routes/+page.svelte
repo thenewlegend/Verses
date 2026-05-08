@@ -68,12 +68,7 @@
 			<!-- Loading overlay -->
 			{#if isRefreshing}
 				<div class="absolute inset-0 z-20 flex items-center justify-center bg-primary-900/60 backdrop-blur-[2px]">
-					<div class="flex flex-col items-center gap-3">
-						<RefreshCw size={24} class="animate-spin text-white/80" />
-						<div class="h-1 w-32 overflow-hidden rounded-full bg-white/20">
-							<div class="h-full bg-white transition-all duration-700 ease-out" style="width: {isRefreshing ? '100%' : '0%'}"></div>
-						</div>
-					</div>
+					<RefreshCw size={32} class="animate-spin text-white/80" />
 				</div>
 			{/if}
 
