@@ -41,7 +41,7 @@ export default defineConfig({
 				]
 			},
 			workbox: {
-				globPatterns: ['**/*.{js,css,html,png,svg,ico,woff,woff2}'],
+				globPatterns: ['**/*.{js,css,html,png,svg,ico,webmanifest}'],
 				runtimeCaching: [
 					{
 						urlPattern: /\/rest\/v1\/verses/,

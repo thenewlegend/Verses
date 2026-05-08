@@ -8,7 +8,7 @@
 	let { data } = $props();
 	let showDeleteConfirm = $state(false);
 
-	const { form, errors, enhance, delayed, message: formMessage } = superForm(data.form, {
+	const { form, errors, enhance, delayed, message: formMessage } = superForm(() => data.form, {
 		resetForm: false
 	});
 </script>

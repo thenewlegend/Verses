@@ -1,3 +1,6 @@
+<script lang="ts">
+	import { AlertCircle, X } from '@lucide/svelte';
+	import { fade, scale } from 'svelte/transition';
 	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { 
@@ -20,7 +23,14 @@
 		triggerHaptic('medium');
 		onCancel?.();
 	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key === 'Escape') handleCancel();
+		if (e.key === 'Enter' && type !== 'danger') handleConfirm();
+	}
 </script>
+
+<svelte:window onkeydown={handleKeyDown} />
 
 {#if show}
 	<!-- Backdrop -->
@@ -28,7 +38,10 @@
 		transition:fade={{ duration: 200 }}
 		class="fixed inset-0 z-[100] flex items-center justify-center bg-surface-900/40 p-4 backdrop-blur-sm"
 		onclick={handleCancel}
-		aria-hidden="true"
+		onkeydown={(e) => e.key === 'Escape' && handleCancel()}
+		role="button"
+		tabindex="-1"
+		aria-label="Close modal"
 	>
 		<!-- Modal -->
 		<div 

@@ -5,7 +5,7 @@
 
 	let { data } = $props();
 
-	const { form, errors, enhance, delayed, message: formMessage } = superForm(data.form, {
+	const { form, errors, enhance, delayed, message: formMessage } = superForm(() => data.form, {
 		resetForm: false
 	});
 </script>
