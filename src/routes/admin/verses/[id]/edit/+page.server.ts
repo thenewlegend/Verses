@@ -1,7 +1,7 @@
 import type { Actions, PageServerLoad } from './$types';
 import { fail, redirect, error } from '@sveltejs/kit';
 import { superValidate, message } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { zod4 as zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 
 const verseSchema = z.object({
@@ -12,27 +12,37 @@ const verseSchema = z.object({
 });
 
 export const load: PageServerLoad = async ({ params, locals: { supabase } }) => {
-	const { data: verse, error: dbError } = await supabase
-		.from('verses')
-		.select('*')
-		.eq('id', params.id)
-		.single();
+	try {
+		console.log('Loading verse for edit:', params.id);
+		const { data: verse, error: dbError } = await supabase
+			.from('verses')
+			.select('*')
+			.eq('id', params.id)
+			.single();
 
-	if (dbError || !verse) {
-		throw error(404, 'Verse not found');
+		if (dbError || !verse) {
+			console.error('DB Error loading verse:', dbError);
+			throw error(404, 'Verse not found');
+		}
+
+		console.log('Verse loaded:', verse.reference);
+
+		const form = await superValidate(
+			{
+				verse: verse.verse,
+				reference: verse.reference,
+				class_number: verse.class_number,
+				is_published: verse.is_published ?? true
+			},
+			zod(verseSchema)
+		);
+
+		return { form, verse };
+	} catch (err: any) {
+		console.error('Edit Load Exception:', err);
+		if (err.status) throw err;
+		throw error(500, 'Internal Error: ' + (err.message || 'Unknown'));
 	}
-
-	const form = await superValidate(
-		{
-			verse: verse.verse,
-			reference: verse.reference,
-			class_number: verse.class_number,
-			is_published: verse.is_published
-		},
-		zod(verseSchema)
-	);
-
-	return { form, verse };
 };
 
 export const actions: Actions = {
