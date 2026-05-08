@@ -11,8 +11,33 @@ const verseSchema = z.object({
 	is_published: z.boolean().default(false)
 });
 
-export const load: PageServerLoad = async () => {
-	const form = await superValidate(zod(verseSchema));
+export const load: PageServerLoad = async ({ url, locals: { supabase } }) => {
+	const fromId = url.searchParams.get('from');
+	let initialData = {
+		verse: '',
+		reference: '',
+		class_number: 1,
+		is_published: false
+	};
+
+	if (fromId) {
+		const { data: source } = await supabase
+			.from('verses')
+			.select('*')
+			.eq('id', fromId)
+			.single();
+
+		if (source) {
+			initialData = {
+				verse: source.verse,
+				reference: `${source.reference} (Copy)`,
+				class_number: source.class_number,
+				is_published: false // Default duplicates to draft
+			};
+		}
+	}
+
+	const form = await superValidate(initialData, zod(verseSchema));
 	return { form };
 };
 
