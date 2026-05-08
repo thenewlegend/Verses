@@ -4,6 +4,7 @@
 		BarChart3, Copy, Search, X, Filter 
 	} from '@lucide/svelte';
 	import { page } from '$app/state';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data } = $props();
 
@@ -52,6 +53,7 @@
 		<h1 class="text-xl font-bold text-surface-900 ">Manage Verses</h1>
 		<a
 			href="/admin/verses/new"
+			onclick={() => triggerHaptic('strong')}
 			class="flex items-center gap-1.5 rounded-xl bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-primary-700 active:scale-95"
 		>
 			<Plus size={16} /> Add New
@@ -85,6 +87,7 @@
 		{#each stats as stat}
 			<a 
 				href={getStatusUrl(stat.id === 'all' ? null : stat.id)}
+				onclick={() => triggerHaptic('strong')}
 				class="rounded-2xl border p-4 transition-all active:scale-[0.98] {stat.active 
 					? 'border-primary-500 bg-primary-50/30  ring-1 ring-primary-500' 
 					: 'border-surface-200 bg-white hover:border-surface-300  '}"
@@ -147,6 +150,7 @@
 					<div class="flex items-center justify-end gap-2 border-t border-surface-100 pt-3 ">
 						<a
 							href="/admin/verses/new?from={verse.id}"
+							onclick={() => triggerHaptic('strong')}
 							class="flex h-9 w-9 items-center justify-center rounded-xl text-surface-400 transition-colors hover:bg-primary-50 hover:text-primary-600 "
 							title="Duplicate"
 						>
@@ -154,6 +158,7 @@
 						</a>
 						<a
 							href="/admin/verses/{verse.id}/edit"
+							onclick={() => triggerHaptic('strong')}
 							class="flex h-9 items-center gap-2 rounded-xl bg-surface-100 px-4 text-sm font-bold text-surface-700 transition-colors hover:bg-primary-600 hover:text-white    "
 						>
 							<Edit size={16} />

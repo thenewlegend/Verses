@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Search, X } from '@lucide/svelte';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	interface Props {
 		value: string;
@@ -23,6 +24,7 @@
 	}
 
 	function clear() {
+		triggerHaptic('medium');
 		value = '';
 		oninput?.('');
 	}

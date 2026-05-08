@@ -8,6 +8,7 @@
 		ArrowLeft,
 		Shield,
 	} from "@lucide/svelte";
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data, children } = $props();
 	let isLoginPage = $derived(page.url.pathname === "/admin/login");
@@ -49,6 +50,7 @@
 					<form method="POST" action="/admin/login?/signout">
 						<button
 							type="submit"
+							onclick={() => triggerHaptic('strong')}
 							class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium text-surface-500 transition-colors hover:bg-red-50 hover:text-red-600"
 						>
 							<LogOut size={14} />
@@ -64,6 +66,7 @@
 					{@const isActive = page.url.pathname.startsWith(item.href)}
 					<a
 						href={item.href}
+						onclick={() => triggerHaptic('strong')}
 						class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all {isActive
 							? 'bg-primary-600 text-white'
 							: 'text-surface-600 hover:bg-surface-200  '}"

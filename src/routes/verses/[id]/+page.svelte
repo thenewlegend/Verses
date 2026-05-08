@@ -6,6 +6,7 @@
 	import { shareVerse } from '$lib/utils/share';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data } = $props();
 	let verse = $derived(data.verse);
@@ -25,6 +26,7 @@
 	<!-- Back button -->
 	<a
 		href="/verses"
+		onclick={() => triggerHaptic('strong')}
 		class="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700  "
 	>
 		<ArrowLeft size={16} />
@@ -57,21 +59,21 @@
 		<!-- Actions -->
 		<div class="flex items-center justify-center gap-2 border-t border-surface-100 px-6 py-4 ">
 			<button
-				onclick={() => copyToClipboard(`"${verse.verse}" — ${verse.reference}`)}
+				onclick={() => { triggerHaptic('strong'); copyToClipboard(`"${verse.verse}" — ${verse.reference}`); }}
 				class="flex items-center gap-2 rounded-xl bg-surface-100 px-5 py-3 text-sm font-medium text-surface-700 transition-all hover:bg-surface-200 active:scale-95   "
 			>
 				<Copy size={16} />
 				Copy
 			</button>
 			<button
-				onclick={() => shareVerse(verse.verse, verse.reference)}
+				onclick={() => { triggerHaptic('strong'); shareVerse(verse.verse, verse.reference); }}
 				class="flex items-center gap-2 rounded-xl bg-surface-100 px-5 py-3 text-sm font-medium text-surface-700 transition-all hover:bg-surface-200 active:scale-95   "
 			>
 				<Share2 size={16} />
 				Share
 			</button>
 			<button
-				onclick={() => favorites.toggle(verse.id)}
+				onclick={() => { triggerHaptic('strong'); favorites.toggle(verse.id); }}
 				class="flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium transition-all active:scale-95 {isFav
 					? 'bg-red-50 text-red-600 hover:bg-red-100   '
 					: 'bg-surface-100 text-surface-700 hover:bg-surface-200   '}"

@@ -3,6 +3,7 @@
 	import { enhance as formEnhance } from '$app/forms';
 	import { ArrowLeft, Save, Trash2, Loader2, CheckCircle, AlertTriangle } from '@lucide/svelte';
 	import ConfirmModal from '$lib/components/ConfirmModal.svelte';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data } = $props();
 	let showDeleteConfirm = $state(false);
@@ -29,7 +30,7 @@
 			<h1 class="text-xl font-bold text-surface-900">Edit Verse</h1>
 		</div>
 		<button
-			onclick={() => (showDeleteConfirm = true)}
+			onclick={() => { triggerHaptic('strong'); showDeleteConfirm = true; }}
 			class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-50"
 		>
 			<Trash2 size={16} />
@@ -139,6 +140,7 @@
 		<button
 			type="submit"
 			disabled={$delayed}
+			onclick={() => triggerHaptic('strong')}
 			class="touch-target flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 py-3.5 text-base font-semibold text-white transition-all hover:bg-primary-700 disabled:opacity-60 active:scale-[0.98]"
 		>
 			{#if $delayed}

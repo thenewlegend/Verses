@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms';
 	import { ArrowLeft, Save, Loader2, AlertTriangle } from '@lucide/svelte';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data } = $props();
 
@@ -17,6 +18,7 @@
 	<div>
 		<a
 			href="/admin/dashboard"
+			onclick={() => triggerHaptic('strong')}
 			class="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-surface-500 transition-colors hover:text-surface-700  "
 		>
 			<ArrowLeft size={16} />
@@ -109,6 +111,7 @@
 		<button
 			type="submit"
 			disabled={$delayed}
+			onclick={() => triggerHaptic('strong')}
 			class="touch-target flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 py-3.5 text-base font-semibold text-white transition-all hover:bg-primary-700 disabled:opacity-60 active:scale-[0.98]"
 		>
 			{#if $delayed}

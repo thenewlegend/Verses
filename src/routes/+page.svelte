@@ -4,6 +4,7 @@
 	import { recentlyViewed } from '$lib/stores/recentlyViewed';
 	import { browser } from '$app/environment';
 	import { BookOpen, Sparkles, Clock, ArrowRight, RefreshCw } from '@lucide/svelte';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data } = $props();
 
@@ -38,6 +39,7 @@
 
 	async function refreshVerse() {
 		if (isRefreshing) return;
+		triggerHaptic('strong');
 		isRefreshing = true;
 		
 		const { invalidateAll, goto } = await import('$app/navigation');
@@ -98,6 +100,7 @@
 				<div class="mt-4 flex gap-2">
 					<a
 						href="/verses/{data.verseOfDay.id}"
+						onclick={() => triggerHaptic('strong')}
 						class="inline-flex items-center gap-1.5 rounded-xl bg-white/15 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25 active:scale-95"
 					>
 						Read more <ArrowRight size={14} />
@@ -123,6 +126,7 @@
 	<section class="grid grid-cols-2 gap-3">
 		<a
 			href="/verses"
+			onclick={() => triggerHaptic('strong')}
 			class="flex items-center gap-3 rounded-2xl border border-surface-200 bg-white p-4 transition-all hover:shadow-[var(--shadow-card-hover)] active:scale-[0.98]  "
 		>
 			<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 text-primary-600  ">
@@ -135,6 +139,7 @@
 		</a>
 		<a
 			href="/search"
+			onclick={() => triggerHaptic('strong')}
 			class="flex items-center gap-3 rounded-2xl border border-surface-200 bg-white p-4 transition-all hover:shadow-[var(--shadow-card-hover)] active:scale-[0.98]  "
 		>
 			<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/10 text-accent-500">
@@ -155,6 +160,7 @@
 				{#each data.classNumbers as cn}
 					<a
 						href="/class/{cn}"
+						onclick={() => triggerHaptic('strong')}
 						class="rounded-xl border border-surface-200 bg-white px-4 py-2.5 text-sm font-medium text-surface-700 transition-all hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 active:scale-95      "
 					>
 						Class {cn}
@@ -173,7 +179,7 @@
 					Verse History
 				</h2>
 				<button
-					onclick={clearHistory}
+					onclick={() => { triggerHaptic('strong'); clearHistory(); }}
 					class="text-xs font-medium text-surface-400 transition-colors hover:text-red-500"
 				>
 					Clear
@@ -183,6 +189,7 @@
 				{#each vodHistory.slice(0, 5) as item}
 					<a
 						href="/verses/{item.id}"
+						onclick={() => triggerHaptic('strong')}
 						class="block rounded-xl border border-surface-200 bg-white p-4 transition-all hover:shadow-[var(--shadow-card)] active:scale-[0.98]  "
 					>
 						<p class="verse-text line-clamp-2 text-sm text-surface-700 ">

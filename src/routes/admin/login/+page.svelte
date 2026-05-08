@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { Shield, Mail, Lock, Loader2 } from '@lucide/svelte';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { form } = $props();
 	let loading = $state(false);
@@ -84,6 +85,7 @@
 			<button
 				type="submit"
 				disabled={loading}
+				onclick={() => triggerHaptic('strong')}
 				class="touch-target flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 py-3.5 text-base font-semibold text-white transition-all hover:bg-primary-700 focus:ring-2 focus:ring-primary-300 focus:outline-none disabled:opacity-60 active:scale-[0.98]"
 			>
 				{#if loading}

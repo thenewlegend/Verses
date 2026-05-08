@@ -1,6 +1,4 @@
-<script lang="ts">
-	import { AlertCircle, X } from '@lucide/svelte';
-	import { fade, scale } from 'svelte/transition';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { 
 		show = false, 
@@ -14,10 +12,12 @@
 	} = $props();
 
 	function handleConfirm() {
+		triggerHaptic('strong');
 		onConfirm?.();
 	}
 
 	function handleCancel() {
+		triggerHaptic('medium');
 		onCancel?.();
 	}
 </script>

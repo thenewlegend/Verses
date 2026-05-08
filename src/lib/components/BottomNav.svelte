@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import { Home, BookOpen, Search, Heart } from '@lucide/svelte';
 
+	import { triggerHaptic } from '$lib/utils/haptics';
+
 	const navItems = [
 		{ href: '/', label: 'Home', icon: Home },
 		{ href: '/verses', label: 'Browse', icon: BookOpen },
@@ -22,6 +24,7 @@
 				item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href)}
 			<a
 				href={item.href}
+				onclick={() => triggerHaptic('strong')}
 				class="touch-target flex flex-1 flex-col items-center gap-0.5 py-2 transition-all duration-200 {isActive
 					? 'text-primary-600 '
 					: 'text-surface-500 hover:text-surface-700  '}"

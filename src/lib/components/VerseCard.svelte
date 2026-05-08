@@ -3,6 +3,7 @@
 	import { favorites } from '$lib/stores/favorites';
 	import { copyToClipboard } from '$lib/utils/clipboard';
 	import { shareVerse } from '$lib/utils/share';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	interface Props {
 		id: string;
@@ -36,21 +37,21 @@
 
 			<div class="flex items-center gap-1">
 				<button
-					onclick={(e) => { e.stopPropagation(); copyToClipboard(`"${verse}" — ${reference}`); }}
+					onclick={(e) => { e.stopPropagation(); triggerHaptic('strong'); copyToClipboard(`"${verse}" — ${reference}`); }}
 					class="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600  "
 					aria-label="Copy verse"
 				>
 					<Copy size={16} />
 				</button>
 				<button
-					onclick={(e) => { e.stopPropagation(); shareVerse(verse, reference); }}
+					onclick={(e) => { e.stopPropagation(); triggerHaptic('strong'); shareVerse(verse, reference); }}
 					class="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600  "
 					aria-label="Share verse"
 				>
 					<Share2 size={16} />
 				</button>
 				<button
-					onclick={(e) => { e.stopPropagation(); favorites.toggle(id); }}
+					onclick={(e) => { e.stopPropagation(); triggerHaptic('strong'); favorites.toggle(id); }}
 					class="rounded-lg p-2 transition-colors {isFav
 						? 'text-red-500 hover:text-red-600'
 						: 'text-surface-400 hover:bg-surface-100 hover:text-surface-600  '}"
