@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Malayalam:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+	--color-primary-50: oklch(0.97 0.02 285);
+	--color-primary-100: oklch(0.93 0.04 285);
+	--color-primary-200: oklch(0.87 0.08 285);
+	--color-primary-300: oklch(0.78 0.13 285);
+	--color-primary-400: oklch(0.68 0.18 285);
+	--color-primary-500: oklch(0.58 0.22 285);
+	--color-primary-600: oklch(0.50 0.22 285);
+	--color-primary-700: oklch(0.44 0.20 285);
+	--color-primary-800: oklch(0.37 0.16 285);
+	--color-primary-900: oklch(0.30 0.12 285);
+	--color-primary-950: oklch(0.20 0.08 285);
+
+	--color-surface-50: oklch(0.99 0.005 285);
+	--color-surface-100: oklch(0.97 0.008 285);
+	--color-surface-200: oklch(0.94 0.012 285);
+	--color-surface-300: oklch(0.88 0.015 285);
+	--color-surface-400: oklch(0.72 0.02 285);
+	--color-surface-500: oklch(0.55 0.02 285);
+	--color-surface-600: oklch(0.45 0.02 285);
+	--color-surface-700: oklch(0.35 0.02 285);
+	--color-surface-800: oklch(0.25 0.02 285);
+	--color-surface-900: oklch(0.18 0.02 285);
+	--color-surface-950: oklch(0.12 0.015 285);
+
+	--color-accent-400: oklch(0.75 0.15 160);
+	--color-accent-500: oklch(0.65 0.18 160);
+
+	--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+	--font-serif: 'Lora', 'Georgia', serif;
+	--font-malayalam: 'Noto Serif Malayalam', 'Meera', serif;
+
+	--radius-card: 1rem;
+	--radius-btn: 0.75rem;
+
+	--shadow-card: 0 1px 3px oklch(0 0 0 / 0.08), 0 4px 12px oklch(0 0 0 / 0.04);
+	--shadow-card-hover: 0 2px 8px oklch(0 0 0 / 0.12), 0 8px 24px oklch(0 0 0 / 0.06);
+	--shadow-elevated: 0 8px 32px oklch(0 0 0 / 0.12), 0 2px 8px oklch(0 0 0 / 0.06);
+}
+
+/* Base styles */
+
+/* Base styles */
+html {
+	scroll-behavior: smooth;
+	-webkit-tap-highlight-color: transparent;
+	overscroll-behavior: none;
+}
+
+body {
+	font-family: var(--font-sans);
+	background-color: var(--color-surface-50);
+	color: var(--color-surface-900);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	min-height: 100dvh;
+	overflow-x: hidden;
+}
+
+/* Dark mode */
+.dark body {
+	background-color: var(--color-surface-950);
+	color: var(--color-surface-100);
+}
+
+/* Safe area padding for notched devices */
+.safe-bottom {
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Verse typography */
+.verse-text {
+	font-family: var(--font-malayalam);
+	line-height: 1.8;
+	letter-spacing: 0.01em;
+}
+
+/* Smooth transitions for theme changes */
+* {
+	transition-property: background-color, border-color, color;
+	transition-duration: 200ms;
+	transition-timing-function: ease;
+}
+
+/* Disable transition on page load */
+.no-transitions * {
+	transition: none !important;
+}
+
+/* Touch target minimum */
+.touch-target {
+	min-height: 48px;
+	min-width: 48px;
+}
+
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+	0% { background-position: -200% 0; }
+	100% { background-position: 200% 0; }
+}
+
+.skeleton {
+	background: linear-gradient(
+		90deg,
+		var(--color-surface-200) 25%,
+		var(--color-surface-100) 50%,
+		var(--color-surface-200) 75%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite ease-in-out;
+	border-radius: 0.5rem;
+}
+
+.dark .skeleton {
+	background: linear-gradient(
+		90deg,
+		var(--color-surface-800) 25%,
+		var(--color-surface-700) 50%,
+		var(--color-surface-800) 75%
+	);
+	background-size: 200% 100%;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-surface-300);
+	border-radius: 2px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+	background: var(--color-surface-700);
+}
+
+/* Pull-to-refresh prevention */
+body {
+	overscroll-behavior-y: contain;
+}
