@@ -8,7 +8,7 @@ const verseSchema = z.object({
 	verse: z.string().min(5, 'Verse text must be at least 5 characters'),
 	reference: z.string().min(3, 'Reference must be at least 3 characters'),
 	class_number: z.number().int().min(1, 'Class number must be at least 1'),
-	is_published: z.boolean().default(true)
+	is_published: z.boolean().default(false)
 });
 
 export const load: PageServerLoad = async ({ params, locals: { supabase } }) => {
