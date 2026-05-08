@@ -1,42 +1,19 @@
-# sv
+# Verses
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A simple, beautiful way to carry God's word with you every day.
 
-## Creating a project
+## What is this?
+Verses is a personal Bible study companion designed to be fast, reliable, and easy to use. It provides a clean space to:
+- Discover a new random Bible verse every visit.
+- Browse through a collection of curated scriptures.
+- Search for specific verses by text or reference.
+- Save your favorite verses for quick access later.
+- Manage and add new content via a secure admin dashboard.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Designed for Mobile
+This application is built as a Progressive Web App (PWA), meaning it works just like a native app on your phone. You can install it to your home screen, it works offline, and it's optimized for one-handed use.
 
-```sh
-# create a new project
-npx sv create my-app
-```
+---
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.15.2 create --template minimal --types ts --add tailwindcss="plugins:none" sveltekit-adapter="adapter:vercel" --install npm ./
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### A Personal Note
+*I built this for my mother, to make it easier for her to find and keep the scriptures that mean the most to her.*
