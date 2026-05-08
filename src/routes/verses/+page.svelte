@@ -1,8 +1,10 @@
 <script lang="ts">
 	import VerseCard from '$lib/components/VerseCard.svelte';
 	import SkeletonCard from '$lib/components/SkeletonCard.svelte';
-	import { BookOpen, Loader2 } from '@lucide/svelte';
+	import { BookOpen, Loader2, RefreshCw } from '@lucide/svelte';
 	import { onMount } from 'svelte';
+	import { invalidateAll } from '$app/navigation';
+	import { triggerHaptic } from '$lib/utils/haptics';
 
 	let { data } = $props();
 	let { streamed } = $derived(data);
@@ -12,6 +14,7 @@
 	let classNumbers = $state<number[]>([]);
 	let currentPage = $state(1);
 	let loading = $state(false);
+	let isSyncing = $state(false);
 	let hasMore = $derived(verses.length < totalCount);
 
 	let observerTarget: HTMLElement | null = $state(null);
@@ -64,6 +67,20 @@
 
 		return () => observer.disconnect();
 	});
+	async function handleSync() {
+		if (isSyncing) return;
+		isSyncing = true;
+		triggerHaptic('strong');
+		
+		try {
+			await invalidateAll();
+			// Small delay to make the animation feel substantial
+			await new Promise(resolve => setTimeout(resolve, 600));
+			triggerHaptic('medium');
+		} finally {
+			isSyncing = false;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -72,13 +89,23 @@
 </svelte:head>
 
 <div class="space-y-6 py-2">
-	<div>
-		<h1 class="text-2xl font-bold text-surface-900 ">Browse Verses</h1>
-		{#await streamed.totalCount}
-			<div class="mt-1 h-4 w-24 skeleton"></div>
-		{:then count}
-			<p class="mt-1 text-sm text-surface-500">{count} verses available</p>
-		{/await}
+	<div class="flex items-center justify-between">
+		<div>
+			<h1 class="text-2xl font-bold text-surface-900 ">Browse Verses</h1>
+			{#await streamed.totalCount}
+				<div class="mt-1 h-4 w-24 skeleton"></div>
+			{:then count}
+				<p class="mt-1 text-sm text-surface-500">{count} verses available</p>
+			{/await}
+		</div>
+		<button 
+			onclick={handleSync}
+			disabled={isSyncing}
+			class="flex h-10 w-10 items-center justify-center rounded-xl border border-surface-200 bg-white text-surface-500 transition-all hover:border-primary-300 hover:text-primary-600 active:scale-90 disabled:opacity-50"
+			aria-label="Sync data"
+		>
+			<RefreshCw size={20} class={isSyncing ? 'animate-spin' : ''} />
+		</button>
 	</div>
 
 	<!-- Class filter chips -->
