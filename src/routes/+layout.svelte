@@ -63,8 +63,15 @@
 					</div>
 					<span
 						class="text-lg font-bold tracking-tight text-surface-900 dark:text-surface-100"
-						>Hi, Jinija!</span
 					>
+						{#if data.user}
+							Hi, {data.user.user_metadata?.full_name ||
+								data.user.email?.split("@")[0] ||
+								"User"}!
+						{:else}
+							Hi, Jinija!
+						{/if}
+					</span>
 				</a>
 				<div class="flex items-center gap-1">
 					<ThemeToggle />
