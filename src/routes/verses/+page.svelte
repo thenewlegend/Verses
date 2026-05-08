@@ -5,11 +5,14 @@
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
+	let { streamed } = $derived(data);
 
 	let verses = $state<any[]>([]);
+	let totalCount = $state(0);
+	let classNumbers = $state<number[]>([]);
 	let currentPage = $state(1);
 	let loading = $state(false);
-	let hasMore = $derived(verses.length < data.totalCount);
+	let hasMore = $derived(verses.length < totalCount);
 
 	let observerTarget: HTMLElement | null = $state(null);
 
@@ -39,9 +42,11 @@
 		}
 	}
 
-	// Re-initialize when data changes (e.g. filter change)
+	// Wait for streamed data
 	$effect(() => {
-		verses = [...data.verses];
+		streamed.verses.then(v => verses = v);
+		streamed.totalCount.then(c => totalCount = c);
+		streamed.classNumbers.then(cn => classNumbers = cn);
 		currentPage = data.currentPage;
 	});
 
@@ -69,21 +74,29 @@
 <div class="space-y-6 py-2">
 	<div>
 		<h1 class="text-2xl font-bold text-surface-900 ">Browse Verses</h1>
-		<p class="mt-1 text-sm text-surface-500">{data.totalCount} verses available</p>
+		{#await streamed.totalCount}
+			<div class="mt-1 h-4 w-24 skeleton"></div>
+		{:then count}
+			<p class="mt-1 text-sm text-surface-500">{count} verses available</p>
+		{/await}
 	</div>
 
 	<!-- Class filter chips -->
-	{#if data.classNumbers.length > 0}
-		<div class="flex flex-wrap gap-2">
-			<a
-				href="/verses"
-				class="rounded-xl px-3.5 py-2 text-sm font-medium transition-all active:scale-95 {data.activeClass === null
-					? 'bg-primary-600 text-white shadow-sm'
-					: 'border border-surface-200 bg-white text-surface-600 hover:border-primary-300   '}"
-			>
-				All
-			</a>
-			{#each data.classNumbers as cn}
+	<div class="flex flex-wrap gap-2">
+		<a
+			href="/verses"
+			class="rounded-xl px-3.5 py-2 text-sm font-medium transition-all active:scale-95 {data.activeClass === null
+				? 'bg-primary-600 text-white shadow-sm'
+				: 'border border-surface-200 bg-white text-surface-600 hover:border-primary-300   '}"
+		>
+			All
+		</a>
+		{#await streamed.classNumbers}
+			{#each Array(4) as _}
+				<div class="h-9 w-20 skeleton"></div>
+			{/each}
+		{:then numbers}
+			{#each numbers as cn}
 				<a
 					href="/verses?class={cn}"
 					class="rounded-xl px-3.5 py-2 text-sm font-medium transition-all active:scale-95 {data.activeClass === cn
@@ -93,40 +106,48 @@
 					Class {cn}
 				</a>
 			{/each}
-		</div>
-	{/if}
+		{/await}
+	</div>
 
 	<!-- Verses list -->
-	{#if verses.length > 0}
+	{#await streamed.verses}
 		<div class="space-y-4">
-			{#each verses as verse (verse.id)}
-				<VerseCard
-					id={verse.id}
-					verse={verse.verse}
-					reference={verse.reference}
-					classNumber={verse.class_number}
-					compact
-				/>
+			{#each Array(5) as _}
+				<SkeletonCard compact />
 			{/each}
 		</div>
+	{:then versesList}
+		{#if versesList.length > 0}
+			<div class="space-y-4">
+				{#each versesList as verse (verse.id)}
+					<VerseCard
+						id={verse.id}
+						verse={verse.verse}
+						reference={verse.reference}
+						classNumber={verse.class_number}
+						compact
+					/>
+				{/each}
+			</div>
 
-		<!-- Infinite Scroll Trigger -->
-		{#if hasMore}
-			<div bind:this={observerTarget} class="flex justify-center py-8">
-				{#if loading}
-					<Loader2 class="h-6 w-6 animate-spin text-primary-600" />
-				{:else}
-					<div class="h-1 w-full"></div>
-				{/if}
+			<!-- Infinite Scroll Trigger -->
+			{#if hasMore}
+				<div bind:this={observerTarget} class="flex justify-center py-8">
+					{#if loading}
+						<Loader2 class="h-6 w-6 animate-spin text-primary-600" />
+					{:else}
+						<div class="h-1 w-full"></div>
+					{/if}
+				</div>
+			{/if}
+		{:else}
+			<div class="rounded-2xl bg-surface-100 p-12 text-center ">
+				<BookOpen size={40} class="mx-auto mb-3 text-surface-400" />
+				<p class="text-lg font-medium text-surface-600 ">No verses found</p>
+				<p class="mt-1 text-sm text-surface-400">
+					{data.activeClass ? 'Try a different class filter.' : 'Verses will appear here once added.'}
+				</p>
 			</div>
 		{/if}
-	{:else}
-		<div class="rounded-2xl bg-surface-100 p-12 text-center ">
-			<BookOpen size={40} class="mx-auto mb-3 text-surface-400" />
-			<p class="text-lg font-medium text-surface-600 ">No verses found</p>
-			<p class="mt-1 text-sm text-surface-400">
-				{data.activeClass ? 'Try a different class filter.' : 'Verses will appear here once added.'}
-			</p>
-		</div>
-	{/if}
+	{/await}
 </div>

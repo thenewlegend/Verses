@@ -11,19 +11,20 @@ export const load: PageServerLoad = async ({ params, url, locals: { supabase } }
 	const limit = 20;
 	const offset = (page - 1) * limit;
 
-	const { data: verses, count } = await supabase
+	const versesPromise = supabase
 		.from('verses')
 		.select('*', { count: 'exact' })
 		.eq('is_published', true)
 		.eq('class_number', classNumber)
 		.order('created_at', { ascending: false })
-		.range(offset, offset + limit - 1);
+		.range(offset, offset + limit - 1)
+		.then(({ data, count }) => ({ verses: data || [], totalCount: count || 0 }));
 
 	return {
-		verses: verses || [],
+		streamed: {
+			results: versesPromise
+		},
 		classNumber,
-		totalCount: count || 0,
-		currentPage: page,
-		totalPages: Math.ceil((count || 0) / limit)
+		currentPage: page
 	};
 };

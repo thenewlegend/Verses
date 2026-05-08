@@ -5,7 +5,8 @@
 	import BottomNav from "$lib/components/BottomNav.svelte";
 	import Toast from "$lib/components/Toast.svelte";
 	import InstallPrompt from "$lib/components/InstallPrompt.svelte";
-	import { page } from "$app/stores";
+	import { page, navigating } from "$app/stores";
+	import { fade } from "svelte/transition";
 
 	let { data, children } = $props();
 	let { supabase, session } = $derived(data);
@@ -43,6 +44,16 @@
 	/>
 	<link rel="apple-touch-icon" href="/icon-192.png" />
 </svelte:head>
+
+<!-- Global Loading Bar -->
+{#if $navigating}
+	<div 
+		transition:fade={{ duration: 150 }}
+		class="fixed top-0 left-0 right-0 z-[100] h-1 bg-primary-100"
+	>
+		<div class="h-full w-full origin-left scale-x-0 animate-progress-bar bg-primary-600"></div>
+	</div>
+{/if}
 
 <div class="flex min-h-dvh flex-col">
 	<!-- Top bar -->

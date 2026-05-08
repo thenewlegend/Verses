@@ -17,24 +17,27 @@ export const load: PageServerLoad = async ({ url, locals: { supabase } }) => {
 		query = query.eq('class_number', parseInt(classFilter));
 	}
 
-	const { data: verses, count } = await query;
+	const versesPromise = query.then(({ data }) => data || []);
+	const countPromise = query.then(({ count }) => count || 0);
 
 	// Get distinct class numbers for filter
-	const { data: classData } = await supabase
+	const classNumbersPromise = supabase
 		.from('verses')
 		.select('class_number')
-		.eq('is_published', true);
-
-	const classNumbers = classData
-		? [...new Set(classData.map((v) => v.class_number))].sort((a, b) => a - b)
-		: [];
+		.eq('is_published', true)
+		.then(({ data }) => {
+			return data
+				? [...new Set(data.map((v) => v.class_number))].sort((a, b) => a - b)
+				: [];
+		});
 
 	return {
-		verses: verses || [],
-		totalCount: count || 0,
+		streamed: {
+			verses: versesPromise,
+			totalCount: countPromise,
+			classNumbers: classNumbersPromise
+		},
 		currentPage: page,
-		totalPages: Math.ceil((count || 0) / limit),
-		classNumbers,
 		activeClass: classFilter ? parseInt(classFilter) : null
 	};
 };
