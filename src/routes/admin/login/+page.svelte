@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Admin Login — Bible Verse App</title>
+	<title>Admin Login — Verses</title>
 </svelte:head>
 
 <div class="flex min-h-[80dvh] items-center justify-center px-4">

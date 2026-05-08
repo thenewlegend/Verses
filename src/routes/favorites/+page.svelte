@@ -48,7 +48,7 @@
 </script>
 
 <svelte:head>
-	<title>Favorites — Bible Verse App</title>
+	<title>Favorites — Verses</title>
 	<meta name="description" content="Your saved favorite Bible verses." />
 </svelte:head>
 

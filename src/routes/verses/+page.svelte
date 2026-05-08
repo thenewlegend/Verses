@@ -62,7 +62,7 @@
 </script>
 
 <svelte:head>
-	<title>Browse Verses — Bible Verse App</title>
+	<title>Browse Verses — Verses</title>
 	<meta name="description" content="Browse all published Bible verses. Filter by class number." />
 </svelte:head>
 

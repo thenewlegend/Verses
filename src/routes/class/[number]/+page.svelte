@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Class {data.classNumber} Verses — Bible Verse App</title>
+	<title>Class {data.classNumber} — Verses</title>
 	<meta name="description" content="Browse Bible verses for Class {data.classNumber}." />
 </svelte:head>
 

@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-	<title>Bible Verse App</title>
+	<title>Verses</title>
 	<meta
 		name="description"
 		content="Browse, search, and save beautiful Bible verses. Discover your verse of the day."

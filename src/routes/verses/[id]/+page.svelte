@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-	<title>{verse.reference} — Bible Verse App</title>
+	<title>{verse.reference} — Verses</title>
 	<meta name="description" content={verse.verse.slice(0, 160)} />
 </svelte:head>
 

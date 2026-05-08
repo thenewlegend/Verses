@@ -12,7 +12,7 @@ export default defineConfig({
 			injectRegister: 'auto',
 			includeAssets: ['favicon.png', 'apple-touch-icon.png'],
 			manifest: {
-				name: 'Bible Verse App',
+				name: 'Verses',
 				short_name: 'Verses',
 				description: 'Browse, search, and save Bible verses',
 				theme_color: '#1e1b4b',

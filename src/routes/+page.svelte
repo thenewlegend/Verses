@@ -57,7 +57,7 @@
 </script>
 
 <svelte:head>
-	<title>Bible Verse App — Your Daily Scripture</title>
+	<title>Verses — Your Daily Scripture</title>
 	<meta name="description" content="Discover a new Bible verse every visit. Browse, search, and save your favorite scriptures." />
 </svelte:head>
 

@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>Search{data.query ? ` — "${data.query}"` : ''} — Bible Verse App</title>
+	<title>Search{data.query ? ` — "${data.query}"` : ''} — Verses</title>
 	<meta name="description" content="Search through Bible verses by text or reference." />
 </svelte:head>
 
