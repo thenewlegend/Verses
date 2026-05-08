@@ -8,7 +8,6 @@
 		ArrowLeft,
 		Shield,
 	} from "@lucide/svelte";
-	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
 
 	let { data, children } = $props();
 	let isLoginPage = $derived(page.url.pathname === "/admin/login");
