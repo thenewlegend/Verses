@@ -46,10 +46,12 @@
 		<!-- Modal -->
 		<div 
 			transition:scale={{ duration: 200, start: 0.95 }}
-			class="w-full max-w-sm rounded-3xl bg-white p-6 shadow-elevated"
+			class="w-full max-w-sm rounded-3xl bg-white p-6 shadow-elevated focus:outline-none"
 			onclick={(e) => e.stopPropagation()}
+			onkeydown={(e) => e.stopPropagation()}
 			aria-modal="true"
 			role="dialog"
+			tabindex="0"
 		>
 			<div class="mb-4 flex items-center justify-between">
 				<div class="flex h-12 w-12 items-center justify-center rounded-2xl {type === 'danger' ? 'bg-red-50 text-red-600' : 'bg-primary-50 text-primary-600'}">

@@ -42,6 +42,7 @@ export default defineConfig({
 			},
 			workbox: {
 				globPatterns: ['**/*.{js,css,html,png,svg,ico,webmanifest}'],
+				globIgnores: ['**/node_modules/**/*', 'server/**'],
 				runtimeCaching: [
 					{
 						urlPattern: /\/rest\/v1\/verses/,
@@ -51,6 +52,9 @@ export default defineConfig({
 							expiration: {
 								maxEntries: 200,
 								maxAgeSeconds: 86400
+							},
+							cacheableResponse: {
+								statuses: [0, 200]
 							}
 						}
 					}
